@@ -1,1 +1,1 @@
-# mypage
+# mypageforfriend.io
