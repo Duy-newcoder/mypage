@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chúc mừng sinh nhật Thùy Dương</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd6ec, #ffe6f0);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gift-box {
+      width: 150px;
+      height: 150px;
+      background: #ff66b2;
+      border-radius: 10px;
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      box-shadow: 0 0 20px #ff99cc;
+      animation: glow 1s infinite alternate;
+      z-index: 10;
+    }
+
+    .gift-box::before,
+    .gift-box::after {
+      content: '';
+      position: absolute;
+      background: white;
+    }
+
+    .gift-box::before {
+      width: 20px;
+      height: 150px;
+      left: 65px;
+      top: 0;
+    }
+
+    .gift-box::after {
+      width: 150px;
+      height: 20px;
+      top: 65px;
+      left: 0;
+    }
+
+    .click-text {
+      position: absolute;
+      top: calc(40% + 90px);
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.4em;
+      color: #cc0066;
+      font-weight: bold;
+      animation: pulse 1.2s infinite;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.1); opacity: 0.7; }
+      100% { transform: translateX(-50%) scale(1); opacity: 1; }
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #ff99cc; }
+      to { box-shadow: 0 0 30px #ff66cc; }
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: gold;
+      border-radius: 50%;
+      animation: explode 1.2s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(5); opacity: 0; }
+    }
+
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 90%;
+      max-width: 600px;
+      background: #fffdfd url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+      border: 5px solid #ff99cc;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.6);
+      padding: 30px;
+      text-align: center;
+      z-index: 5;
+      transition: transform 0.6s ease;
+    }
+
+    .card.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .card h1 {
+      font-size: 2.5em;
+      background: linear-gradient(45deg, #ff3399, #ffcc00, #33ccff, #ff3399);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: colorShift 4s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    .card p {
+      font-size: 1.2em;
+      color: #660033;
+      line-height: 1.6;
+      border: 2px dashed #ff66cc;
+      padding: 15px;
+      background-color: #fff0f8;
+      border-radius: 10px;
+    }
+
+    @keyframes colorShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .balloon-static {
+      position: absolute;
+      width: 50px;
+      height: 60px;
+      background-color: #ffccff;
+      border-radius: 50%;
+      top: 10px;
+    }
+
+    .left-balloon {
+      left: 10%;
+    }
+
+    .right-balloon {
+      right: 10%;
+    }
+  </style>
+</head>
+<body>
+  <div class="gift-box" id="giftBox"></div>
+  <div class="click-text">Bấm dô đây 🎁</div>
+
+  <div class="card" id="card">
+    <h1>Chúc mừng sinh nhật Thùy Dương</h1>
+    <p>Chúc cậu tuổi mới tràn đầy niềm vui, hạnh phúc,<br>
+    hãy kiên trì theo đuổi ước mơ của mình và tìm được nhiều niềm vui trong cuộc sống!!! :)))<br><br>
+    Nếu như có một ngày bạn thật sự bế tắc và mọi cánh cửa dường như đã khép lại thì hãy yên tâm rằng luôn có một người sẵn lòng san sẻ với bạn, đó là tôi. Chúc mừng sinh nhật nhé bạn của tôi!</p>
+  </div>
+
+  <div class="balloon-static left-balloon"></div>
+  <div class="balloon-static right-balloon"></div>
+
+  <script>
+    const giftBox = document.getElementById('giftBox');
+    const card = document.getElementById('card');
+    const clickText = document.querySelector('.click-text');
+
+    function createFirework(x, y) {
+      const fw = document.createElement('div');
+      fw.classList.add('firework');
+      fw.style.left = `${x}px`;
+      fw.style.top = `${y}px`;
+      document.body.appendChild(fw);
+      setTimeout(() => fw.remove(), 1200);
+    }
+
+    giftBox.addEventListener('click', () => {
+      giftBox.style.display = 'none';
+      clickText.style.display = 'none';
+
+      for (let i = 0; i < 10; i++) {
+        let x = 100 + i * 100;
+        setTimeout(() => createFirework(x, window.innerHeight - 50), i * 300);
+      }
+
+      setTimeout(() => {
+        card.classList.add('show');
+      }, 3500);
+    });
+  </script>
+</body>
+</html>
